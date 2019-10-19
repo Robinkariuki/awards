@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Project
+from .models import Project,profile
 from .forms import ProjectForm,VoteForm
 # Create your views here.
 def home(request):
@@ -51,3 +51,14 @@ def search_project(request):
     else:
         message = "No search results yet!"
         return render (request, 'search.html', {"message": message})
+
+def profile(request):
+    current_user = request.user
+    projects = Project.objects.filter(user = current_user)
+
+    try:   
+        prof = Profile.objects.get(prof_user=current_user)
+    except ObjectDoesNotExist:
+        return redirect('new_profile')
+
+    return render(request,'profile/profile.html',{'profile':prof,'projects':projects})        
