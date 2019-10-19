@@ -76,3 +76,15 @@ def new_profile(request):
     else:
         form = ProfileForm()
     return render(request, 'profile/new_profile.html', {"form": form})    
+
+def profile_edit(request):
+    current_user = request.user
+    if request.method == 'POST':
+        logged_user = Profile.objects.get(prof_user=request.user)
+        form = ProfileForm(request.POST, request.FILES, instance=logged_user)
+        if form.is_valid():
+            form.save()
+        return redirect('profile')
+    else:
+        form = ProfileForm()
+    return render(request,'profile/edit_profile.html',{'form':form})
