@@ -61,7 +61,7 @@ def profile(request):
     except ObjectDoesNotExist:
         return redirect('new_profile')
 
-    return render(request,'profile/profile.html',{'profile':prof,'projects':projects})        
+    return render(request,'profile.html',{'profile':prof,'projects':projects})        
 
 def new_profile(request):
     current_user = request.user
@@ -75,7 +75,7 @@ def new_profile(request):
         return redirect('profile')
     else:
         form = ProfileForm()
-    return render(request, 'profile/new_profile.html', {"form": form})    
+    return render(request, 'new_profile.html', {"form": form})    
 
 def profile_edit(request):
     current_user = request.user
@@ -87,4 +87,4 @@ def profile_edit(request):
         return redirect('profile')
     else:
         form = ProfileForm()
-    return render(request,'profile/edit_profile.html',{'form':form})
+    return render(request,'edit_profile.html',{'form':form})
