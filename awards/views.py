@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Project,Profile
+
 from .forms import ProjectForm,VoteForm,ProfileForm
 # Create your views here.
 def home(request):
