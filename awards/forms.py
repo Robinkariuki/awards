@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project,Profile
+from .models import Project
 
 class ProjectForm(forms.ModelForm):
     class Meta:

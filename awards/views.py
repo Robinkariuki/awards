@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Project
+from .forms import ProjectForm,VoteForm
 # Create your views here.
 def home(request):
     all_projects = Project.fetch_all_images()
@@ -37,4 +38,4 @@ def project_review(request,project_id):
 
     except Exception as  e:
         raise Http404()
-    return render(request,'Moringa_Project_Awards/project_review.html',{"vote_form":vote_form,"single_project":single_project,"average_score":average_score})    
+    return render(request,'project_review.html',{"vote_form":vote_form,"single_project":single_project,"average_score":average_score})    
