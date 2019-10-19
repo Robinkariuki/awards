@@ -38,4 +38,16 @@ def project_review(request,project_id):
 
     except Exception as  e:
         raise Http404()
-    return render(request,'project_review.html',{"vote_form":vote_form,"single_project":single_project,"average_score":average_score})    
+    return render(request,'project_review.html',{"vote_form":vote_form,"single_project":single_project,"average_score":average_score})   
+
+def search_project(request):
+    if 'project' in request.GET and request.GET ["project"]:
+        search_term = request.GET.get("project")
+        searched_projects = Project.search_project_by_title(search_term)
+        message = f'{search_term}'
+
+        return render(request, 'search.html', {"message":message, "projects":searched_projects})
+
+    else:
+        message = "No search results yet!"
+        return render (request, 'search.html', {"message": message})
