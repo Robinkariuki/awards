@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Project,Profile
+from django.contrib.auth.decorators import login_required
 
 from .forms import ProjectForm,VoteForm,ProfileForm
 # Create your views here.
@@ -10,7 +11,7 @@ def home(request):
 
 
 
-
+@login_required(login_url='/accounts/login/')
 def project_review(request,project_id):
     try:
         single_project = Project.get_single_project(project_id)
@@ -53,6 +54,7 @@ def search_project(request):
         message = "No search results yet!"
         return render (request, 'search.html', {"message": message})
 
+@login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
     projects = Project.objects.filter(user = current_user)
@@ -62,8 +64,9 @@ def profile(request):
     except ObjectDoesNotExist:
         return redirect('new_profile')
 
-    return render(request,'profile.html',{'profile':prof,'projects':projects})        
+    return render(request,'profile.html',{'profile':prof,'projects':projects})    
 
+@login_required(login_url='/accounts/login/')
 def new_profile(request):
     current_user = request.user
     if request.method == 'POST':
@@ -76,8 +79,9 @@ def new_profile(request):
         return redirect('profile')
     else:
         form = ProfileForm()
-    return render(request, 'new_profile.html', {"form": form})    
+    return render(request, 'new_profile.html', {"form": form})   
 
+@login_required(login_url='/accounts/login/')
 def profile_edit(request):
     current_user = request.user
     if request.method == 'POST':
@@ -90,6 +94,7 @@ def profile_edit(request):
         form = ProfileForm()
     return render(request,'edit_profile.html',{'form':form})
 
+@login_required(login_url='/accounts/login/')
 def new_project(request):
     current_user = request.user
     if request.method == 'POST':
