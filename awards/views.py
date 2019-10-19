@@ -89,3 +89,16 @@ def profile_edit(request):
     else:
         form = ProfileForm()
     return render(request,'edit_profile.html',{'form':form})
+
+def new_project(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProjectForm(request.POST,request.FILES)
+        if form.is_valid():
+            user_image = form.save(commit=False)
+            user_image.user = current_user
+            user_image.save()
+        return redirect('home')
+    else:
+        form = ProjectForm()
+    return render(request,"new_project.html",{"form":form})
