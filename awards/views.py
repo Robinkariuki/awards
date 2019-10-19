@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Project,profile
-from .forms import ProjectForm,VoteForm
+from .forms import ProjectForm,VoteForm,ProfileForm
 # Create your views here.
 def home(request):
     all_projects = Project.fetch_all_images()
