@@ -8,6 +8,10 @@ urlpatterns=[
     url('^$',views.home,name='home'),
     url(r'^project/review/(\d+)',views.project_review,name='project_review'),
     url(r'^search/',views.search_project, name='search_results'),
+    url(r'^profile/$',views.profile,name='profile'),
+    url(r'^new_profile/$',views.new_profile,name = 'new_profile'),
+    url(r'^edit/profile/$',views.profile_edit,name = 'edit_profile'),
+
  
 ]
 
