@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
 from .models import Project,Profile
 from django.contrib.auth.decorators import login_required
-
+from django.core.exceptions import ObjectDoesNotExist
 from .forms import ProjectForm,VoteForm,ProfileForm
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def home(request):
     all_projects = Project.fetch_all_images()
     return render(request,"index.html",{"all_images":all_projects})
