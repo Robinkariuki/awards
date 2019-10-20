@@ -3,6 +3,9 @@ from .models import Project,Profile
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import ProjectForm,VoteForm,ProfileForm
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer,ProjectSerializer
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def home(request):
@@ -108,3 +111,10 @@ def new_project(request):
     else:
         form = ProjectForm()
     return render(request,"new_project.html",{"form":form})
+
+
+class ProfileList(APIView):
+    def get(self,request,format=None):
+        complete_profile = Profile.objects.all()
+        serializers = ProfileSerializer(complete_profile, many=True)
+        return Response(serializers.data)
