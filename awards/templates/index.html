@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container-fluid">
         <div>
-            <h4 class="text-center heading">Sites of the day</4>
+            <h4 class="text-center heading">Sites</4>
         </div>
         <div class="row">
             {% for image in all_images%}
@@ -24,7 +24,7 @@
                         <p class="card-text">{{image.details}}</p>
                         <p><a href="{{image.link}}">Live Project Link</a></p>                    
                         
-                        <a href="{% url 'project_review' image.pk %}" class="btn btn-danger btn-md">Review Project</a>
+                        <a href="{% url 'project_review' image.pk %}" class="btn btn-INFO btn-md">Review Project</a>
     
                     </div>
                 </div>
